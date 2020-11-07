@@ -13,26 +13,35 @@ const Roman = {
       M: 1000,
     };
 
-    let acc = 0;
-    const upper = value.toUpperCase();
+    const output = value
+      .toUpperCase()
+      .split('')
+      .reduce(
+        (acc, cur, idx, str) => {
+          if (acc.skip) {
+            acc.skip = false;
+            return acc;
+          }
 
-    for (let i = 0; i < upper.length; i++) {
-      const key = upper[i];
-      const nextKey = upper[i + 1];
-      const filterI = key === 'I' && ['V', 'X'].includes(nextKey);
-      const filterX = key === 'X' && ['L', 'C'].includes(nextKey);
-      const filterC = key === 'C' && ['D', 'M'].includes(nextKey);
+          const nextKey = str[idx + 1];
+          const filterI = cur === 'I' && ['V', 'X'].includes(nextKey);
+          const filterX = cur === 'X' && ['L', 'C'].includes(nextKey);
+          const filterC = cur === 'C' && ['D', 'M'].includes(nextKey);
 
-      if (filterI || filterX || filterC) {
-        acc = acc + symbols[nextKey] - symbols[key];
-        i = i + 1;
-        continue;
-      }
+          if (filterI || filterX || filterC) {
+            acc.skip = true;
+            acc.sum = acc.sum + symbols[nextKey] - symbols[cur];
+            return acc;
+          }
 
-      acc = acc + symbols[key];
-    }
+          acc.sum = acc.sum + symbols[cur];
+          return acc;
+        },
 
-    return acc;
+        { skip: false, sum: 0 }
+      );
+
+    return output.sum;
   },
 };
 
