@@ -1,26 +1,20 @@
-const SYMBOLS: { [key: string]: number } = {
-  M: 1000,
-  CM: 900,
-  D: 500,
-  CD: 400,
-  C: 100,
-  XC: 90,
-  L: 50,
-  XL: 40,
-  X: 10,
-  IX: 9,
-  V: 5,
-  IV: 4,
-  I: 1,
-};
+import { REGEX, KEYS, SYMBOLS } from './constants';
 
 const Roman = {
-  isRoman() {},
+  isRoman(value: string) {
+    if (!value.length) return false;
+
+    for (const s of value.split('')) {
+      if (!KEYS.includes(s)) return false;
+    }
+
+    return true;
+  },
 
   toRoman(value: number) {
     let copyValue = value;
 
-    return Object.keys(SYMBOLS).reduce((acc, key) => {
+    return KEYS.reduce((acc, key) => {
       while (copyValue >= SYMBOLS[key]) {
         acc = acc + key;
         copyValue = copyValue - SYMBOLS[key];
@@ -31,9 +25,7 @@ const Roman = {
   },
 
   toNumber(value: string) {
-    const match = value.match(/CM|CD|XC|XL|IX|IV|CM|M|D|C|L|X|V|I/g);
-
-    return match?.reduce((acc, key) => {
+    return value.match(REGEX)?.reduce((acc, key) => {
       acc = acc + SYMBOLS[key];
       return acc;
     }, 0);

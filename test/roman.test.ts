@@ -1,5 +1,22 @@
 import Roman from '../src';
 
+test('isRoman', () => {
+  expect(Roman.isRoman('III')).toBeTruthy();
+  expect(Roman.isRoman('IV')).toBeTruthy();
+  expect(Roman.isRoman('IX')).toBeTruthy();
+  expect(Roman.isRoman('XL')).toBeTruthy();
+  expect(Roman.isRoman('XC')).toBeTruthy();
+  expect(Roman.isRoman('CD')).toBeTruthy();
+  expect(Roman.isRoman('CM')).toBeTruthy();
+  expect(Roman.isRoman('LVIII')).toBeTruthy();
+  expect(Roman.isRoman('MCMXCIV')).toBeTruthy();
+
+  expect(Roman.isRoman('')).toBeFalsy();
+  expect(Roman.isRoman('MCMRXCIV')).toBeFalsy();
+  expect(Roman.isRoman('HHH')).toBeFalsy();
+  expect(Roman.isRoman('123')).toBeFalsy();
+});
+
 test('toNumber', () => {
   expect(Roman.toNumber('III')).toBe(3);
   expect(Roman.toNumber('IV')).toBe(4);
