@@ -1,11 +1,11 @@
-# Roman
+# Roman &middot; [![license](https://badgen.now.sh/badge/license/MIT)](./LICENSE)
 A tiny library (~24B) to make it simple to work with Roman numbers.
 
 ## Installation
 To install `roman`, execute:
 
 ```sh
-$ npm install roman
+$ npm install @evandrolg/roman
 ```
 
 or
