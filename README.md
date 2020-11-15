@@ -11,7 +11,7 @@ $ npm install @evandrolg/roman
 or
 
 ```sh
-$ yarn add roman
+$ yarn add @evandrolg/roman
 ```
 
 ## Methods
