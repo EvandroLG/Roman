@@ -18,40 +18,25 @@ const Roman = {
   isRoman() {},
 
   toRoman(value: number) {
-    let concat = '';
     let copyValue = value;
 
-    for (const key of Object.keys(SYMBOLS)) {
+    return Object.keys(SYMBOLS).reduce((acc, key) => {
       while (copyValue >= SYMBOLS[key]) {
-        concat = concat + key;
+        acc = acc + key;
         copyValue = copyValue - SYMBOLS[key];
       }
-    }
 
-    return concat;
+      return acc;
+    }, '');
   },
 
   toNumber(value: string) {
-    let sum = 0;
-    const upper = value.toUpperCase();
+    const match = value.match(/CM|CD|XC|XL|IX|IV|CM|M|D|C|L|X|V|I/g);
 
-    for (let i = 0; i < upper.length; i++) {
-      const key = upper[i];
-      const nextKey = upper[i + 1];
-      const filterI = key === 'I' && ['V', 'X'].includes(nextKey);
-      const filterX = key === 'X' && ['L', 'C'].includes(nextKey);
-      const filterC = key === 'C' && ['D', 'M'].includes(nextKey);
-
-      if (filterI || filterX || filterC) {
-        sum = sum + SYMBOLS[nextKey] - SYMBOLS[key];
-        i = i + 1;
-        continue;
-      }
-
-      sum = sum + SYMBOLS[key];
-    }
-
-    return sum;
+    return match?.reduce((acc, key) => {
+      acc = acc + SYMBOLS[key];
+      return acc;
+    }, 0);
   },
 };
 
