@@ -33,6 +33,12 @@
   },
   "name": "roman",
   "author": "Evandro Leopoldino Gonçalves",
+  "keywords": [
+    "roman",
+    "tiny",
+    "math",
+    "number"
+  ],
   "module": "dist/roman.esm.js",
   "size-limit": [
     {
